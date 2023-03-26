@@ -5,6 +5,6 @@
 #include <avr/io.h>
 
 void LedOut(uint8_t led);
+void RgbLed(uint8_t red, uint8_t green, uint8_t blue);
 
-
-#endif /* LED_H_ */
+#endif
