@@ -3,6 +3,8 @@
 #define LAB_DRIVERS_H_
 
 
+#include "clockfreq.h"     // Clock frequency (F_CPU)
+
 #include "adc/adc.h"                // ADC driver
 #include "buttons/button.h"         // The 5 button driver
 #include "fifo/fifo.h"              // FIFO driver

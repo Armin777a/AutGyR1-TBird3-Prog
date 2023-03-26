@@ -1,16 +1,6 @@
-/*
- * labor12-1-atmega128.c
- *
- * Created: 11/24/2022 11:01:55 AM
- * Author : Armin
- */ 
-
-
-#define F_CPU 16000000
-
 #include <avr/io.h>
-#include <util/delay.h>
 #include "drivers/drivers.h"
+#include <util/delay.h>
 
 #define CLOCK_HHMM			1
 #define CLOCK_MMSS			2
