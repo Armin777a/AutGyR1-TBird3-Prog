@@ -1,11 +1,4 @@
-/*
- * sevseg.h
- *
- * Created: 11/24/2022 11:14:59 AM
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef SEVSEG_H_
 #define SEVSEG_H_
 

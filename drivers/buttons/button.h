@@ -1,11 +1,4 @@
-/*
- * button.h
- *
- * Created: 11/24/2022 11:18:55 AM
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef BUTTON_H_
 #define BUTTON_H_
 

@@ -1,11 +1,4 @@
-/*
- * uart.h
- *
- * Created: 11/24/2022 11:17:24 AM
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef UART_H_
 #define UART_H_
 

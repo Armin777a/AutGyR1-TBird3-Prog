@@ -10,11 +10,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include "init/init.h"
-#include "led/led.h"
-#include "sevseg/sevseg.h"
-#include "uart/uart.h"
-#include "buttons/button.h"
+#include "drivers/drivers.h"
 
 #define CLOCK_HHMM			1
 #define CLOCK_MMSS			2
@@ -92,7 +88,7 @@ ISR(TIMER2_OVF_vect) {
 
 
 ISR(TIMER1_COMPA_vect) {
-	sei();	// Interruptban is engedélyezzük az interruptot
+	sei();	// Interruptban is engedï¿½lyezzï¿½k az interruptot
 	
 	if (IsClockEnabled) {
 		ClockStep();

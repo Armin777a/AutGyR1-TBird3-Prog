@@ -1,11 +1,4 @@
-/*
- * adc.h
- *
- * Created: 30-Nov-22 22:13:42
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef ADC_H_
 #define ADC_H_
 
