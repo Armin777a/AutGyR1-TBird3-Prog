@@ -10,8 +10,12 @@ void InitButton(uint8_t button, void (*callback)(void));    // Initialize one pu
 void ButtonFunctionRun(uint8_t button);                     // Run the push button functions
 void ButtonManagerFunctionCall();                           // Button manager with function pointer
 
-uint8_t MatrixManager();                                    // Matrix keyboard manager
+void InitMatrix(uint8_t button, void (*callback)(void));    // Initialize the matrix keyboard
+void MatrixFunctionRun(uint8_t button);                     // Run the matrix keyboard functions
+void MatrixManagerFunctionCall();                           // Matrix keyboard manager with function pointer
 
+
+uint8_t MatrixManager();                                    // Matrix keyboard manager
 uint8_t ButtonManager();                                    // Returns witch button was pressed
 
 
