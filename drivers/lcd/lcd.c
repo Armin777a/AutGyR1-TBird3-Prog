@@ -1,16 +1,23 @@
-
+// Header files
 #include "lcd.h"
+
+
+
+// ===============================================
+// =                    LCD                     =
+// ===============================================
+
 
 // LCD init
 void LCD_Initialization() {
-	// PIN irányok beállítása: OUT (minden)
+	// PIN irï¿½nyok beï¿½llï¿½tï¿½sa: OUT (minden)
 	DDR_LCD_RS   |= 1<<PIN_LCD_RS;
 	DDR_LCD_RW   |= 1<<PIN_LCD_RW;
 	DDR_LCD_E    |= 1<<PIN_LCD_E;
 	DDR_LCD_DATA |= MASK_H_LCD_DATA;
 	
 	// DATA <- 0x20
-	PORT_LCD_DATA &= MASK_L_LCD_DATA;		// Ne irjunk felül semmit
+	PORT_LCD_DATA &= MASK_L_LCD_DATA;		// Ne irjunk felï¿½l semmit
 	PORT_LCD_DATA |= 0x20;
 	
 	// 5x lcd_clk
@@ -35,7 +42,8 @@ void LCD_Initialization() {
 	LCD_DisplayClear();
 }
 
-// Adat írás
+
+// Send a byte to the lcd to be displayed
 void LCD_SendData(uint8_t data) {
 	// RS <- 1
 	SETBIT(PORT_LCD_RS, PIN_LCD_RS);
@@ -49,7 +57,8 @@ void LCD_SendData(uint8_t data) {
 	LCD_CheckBusyFlag();
 }
 
-// Parancs írás
+
+// Send an instruction to the lcd
 void LCD_SendInstruction(uint8_t data) {
 	// RS <- 0
 	CLRBIT(PORT_LCD_RS, PIN_LCD_RS);
@@ -63,6 +72,8 @@ void LCD_SendInstruction(uint8_t data) {
 	LCD_CheckBusyFlag();
 }
 
+
+// Send th data to the lcd (4 bit mode)
 void LCD_Send8bitsIn4bitMode(uint8_t data) {
 	
 	// Send upper bits
@@ -93,6 +104,8 @@ void LCD_Send8bitsIn4bitMode(uint8_t data) {
 	_delay_us(0.5);
 }
 
+
+// Clear the data bits but only if its one
 void LCD_SetLowData(uint8_t data) {
 	// Clear bits Data Port 7-4
 	CLRBIT(PORT_LCD_DATA, LCD_DATA7);
@@ -123,19 +136,17 @@ void LCD_Clock() {
 	_delay_ms(3);
 }
 
-// String küldés
+
+// Send a string to the cursor position
 void LCD_SendString(char* p) {
-	while(*p){
-		// Pointer mostani értékét kiírjuk
-		LCD_SendData(*p);
-		
-		// Léptetjük a pointert ha a kövi nem \0
-		// Ha 0 akkor kilépünk
-		p++;
+	while(*p){				// While the pointer is not null
+		LCD_SendData(*p);	// Send the pointers data
+		p++;				// Increment the pointer
 	}
 }
 
-// String küldés egy sorra
+
+// Send a string to a specific line
 void LCD_SendStringToLine(char* str, uint8_t line) {
 	uint8_t counter = 0;
 	
@@ -149,14 +160,19 @@ void LCD_SendStringToLine(char* str, uint8_t line) {
 }
 
 
+// Sets the cursor to one of the four lines
 void LCD_SetCursorLine(uint8_t line) {
 	LCD_SetCursorPos(line, 0);
 }
 
+
+// Sets the cursor position
 void LCD_SetCursorPos(uint8_t line, uint8_t column) {
 	LCD_SendInstruction(0x80 | (LCD_GetLineAddres(line) + column));
 }
 
+
+// Returns the address of the line in the LCD
 uint8_t LCD_GetLineAddres(int row) {
 	switch (row) {
 		case 0:
@@ -176,6 +192,7 @@ uint8_t LCD_GetLineAddres(int row) {
 }
 
 
+// Checks the busy flag and waits until its cleared
 void LCD_CheckBusyFlag() {
 	uint8_t input = 0;
 	
@@ -233,29 +250,43 @@ void LCD_CheckBusyFlag() {
 
 
 
+// ================================
+// Supplemental LCD Functions
+// ================================
 
+
+// Clear LCD
 void LCD_DisplayClear() {
 	LCD_SendInstruction(LCD_DISP_CLEAR);
 	LCD_SendInstruction(LCD_RETURN_HOME);
 }
 
+
+// Display on
 void LCD_DisplayOn() {
 	LCD_SendInstruction(LCD_DISP_ON);
 }
 
+
+// Turns the cursor on
 void LCD_CursorOn() {
 	LCD_SendInstruction(LCD_CURSOR_ON);
 }
 
+
+// Turns the cursor off
 void LCD_CursorOff() {
 	LCD_SendInstruction(LCD_CURSOR_OFF);
 }
 
+
+// Turns the cursor blinking on
 void LCD_CursorBlink() {
 	LCD_SendInstruction(LCD_CURSOR_BLINK);
 }
 
 
+// Set the data pins
 void LCD_SetPORT_DATA4to7() {
 	// Set DB4-DB7
 	SETBIT(PORT_LCD_DATA, LCD_DATA4);
@@ -264,6 +295,8 @@ void LCD_SetPORT_DATA4to7() {
 	SETBIT(PORT_LCD_DATA, LCD_DATA7);
 }
 
+
+// Clear data pins as input
 void LCD_ClearDDR_DATA4to7() {
   // set DB4-DB7
   CLRBIT(DDR_LCD_DATA, LCD_DATA4);
@@ -272,6 +305,8 @@ void LCD_ClearDDR_DATA4to7() {
   CLRBIT(DDR_LCD_DATA, LCD_DATA7);
 }
 
+
+// Set data pins as output
 void LCD_SetDDR_DATA4to7() {
 	// Set DB7-DB4 as output
 	SETBIT(DDR_LCD_DATA, LCD_DATA4);
