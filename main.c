@@ -61,9 +61,9 @@ int main(void) {
 	
 	InitPorts();
 	InitTimer();
-	UsartInit(MYUBRR);
-	UsartCursorBlinkOff();
-	UsartClearTerminal();
+	Usart0Init(MYUBRR);
+	Usart0CursorBlinkOff();
+	Usart0ClearTerminal();
 
     while (1) {
     }
@@ -127,38 +127,38 @@ void SetClockUsart() {
 			}
 			
 			SetClockCounter++;
-			UsartTransmit(UsartInput);
+			Usart0Transmit(UsartInput);
 		}
 	}
 	
 	if (UsartInput == '\r') {
-		UsartTransmit('\r');
+		Usart0Transmit('\r');
 		
 		SetClockValue = SetClockDigit1*10 + SetClockDigit2;
 		
 		
 		if ((SetClockState == 1) && (SetClockValue >= 24)) {
-			UsartMoveCursor(5, 0);
-			UsartTransmitString("ERROR");
-			UsartMoveCursor(3, 0);
-			UsartClearLine();
+			Usart0MoveCursor(5, 0);
+			Usart0TransmitString("ERROR");
+			Usart0MoveCursor(3, 0);
+			Usart0ClearLine();
 		} else if (SetClockValue >= 60) {
-			UsartMoveCursor(5, 0);
-			UsartTransmitString("ERROR");
-			UsartMoveCursor(3, 0);
-			UsartClearLine();
+			Usart0MoveCursor(5, 0);
+			Usart0TransmitString("ERROR");
+			Usart0MoveCursor(3, 0);
+			Usart0ClearLine();
 		} else {
-			UsartClearTerminal();
+			Usart0ClearTerminal();
 			
 			SetClockData(SetClockState-1);
 			SetClockState++;
 			
 			if (SetClockState > 3) {
-				UsartClearTerminal();
+				Usart0ClearTerminal();
 				IsClockEnabled = 1;
 				CurrentMode = 1;
 				SendClockUart();
-				UsartCursorBlinkOff();
+				Usart0CursorBlinkOff();
 			} else {
 				PrintSetClock(SetClockState);
 				SetClockDigit1 = 0;
@@ -172,7 +172,7 @@ void SetClockUsart() {
 	
 	if (UsartInput == '\b') {
 		if (SetClockCounter) {
-			UsartTransmitString("\b \b");
+			Usart0TransmitString("\b \b");
 			switch (SetClockCounter) {
 				case 0:
 					SetClockDigit1 = 0;
@@ -221,7 +221,7 @@ void ButtonController() {
 				if (!IsClockEnabled) {
 					IsClockEnabled = 1;
 					SendClockUart();
-					UsartCursorBlinkOff();
+					Usart0CursorBlinkOff();
 				}
 				break;
 			case 2:
@@ -231,7 +231,7 @@ void ButtonController() {
 					SetClockDigit1 = 0;
 					SetClockDigit2 = 0;
 					PrintSetClock(SetClockState);
-					UsartCursorBlinkOn();
+					Usart0CursorBlinkOn();
 				}
 				break;
 			case 3:
@@ -256,7 +256,7 @@ void PrintSetClock(uint8_t select) {
 		return;
 	}
 	
-	UsartTransmitString(SetClockMenu[select-1]);
+	Usart0TransmitString(SetClockMenu[select-1]);
 }
 
 
@@ -272,8 +272,8 @@ void SendClockUart() {
 	UartClockData[6] = (ClockData[CLOCK_SECOND]/10 % 10) + '0';
 	UartClockData[7] = (ClockData[CLOCK_SECOND]    % 10) + '0';
 	
-	UsartClearTerminal();
-	UsartTransmitString(UartClockData);
+	Usart0ClearTerminal();
+	Usart0TransmitString(UartClockData);
 }
 
 

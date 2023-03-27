@@ -167,12 +167,12 @@ void Usart1MoveCursor(uint8_t line, uint8_t position) {
 
 
 // UART1 Cursor blink on
-void Usart0CursorBlinkOn() {
+void Usart1CursorBlinkOn() {
 	Usart1TransmitString("\e[?25h");
 }
 
 
 // UART1 Cursor blink off
-void Usart0CursorBlinkOff() {
+void Usart1CursorBlinkOff() {
 	Usart1TransmitString("\e[?25l");
 }
