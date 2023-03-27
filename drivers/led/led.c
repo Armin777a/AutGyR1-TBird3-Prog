@@ -8,7 +8,7 @@ void LedOut(uint8_t led) {
 	PORTB |= (led<<4) & 0xF0;	// Shift the lower 4 bits up and set it
 }
 
-// RGB LED manager
+// RGB LED manager (RBG in case of atmega128, RGB in case of atmega64) 
 void RgbLed(uint8_t red, uint8_t green, uint8_t blue) {
 	if (red) {
 		PORTC |= 0x80;
