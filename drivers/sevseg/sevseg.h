@@ -4,11 +4,7 @@
 
 #include <avr/io.h>
 
-// Converts a 4 digit integer into 4 different digits
-void SevsegPort(uint8_t num, uint8_t digitsel);
+void SevsegPort(uint8_t num, uint8_t digitsel);     // Converts a 4 digit integer into 4 different digits
+void SevsegOut(uint16_t val);                       // Writes out the input to seven segment dispaly
 
-// Writes out the input to seven segment dispaly
-void SevsegOut(uint16_t val);
-
-
-#endif /* SEVSEG_H_ */
+#endif
