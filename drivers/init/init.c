@@ -14,6 +14,7 @@ void InitPorts() {
 	DDRB = 0xF0;                        // LED 0-3
 	DDRC = 0x78 | 0x80;                 // Matrix + Red LED
 	DDRD = 0xF0;                        // LED 4-7
+	DDRE = 0x08 | 0x04;					// Green LED + Blue LED
 }
 
 

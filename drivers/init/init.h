@@ -1,11 +1,4 @@
-/*
- * init.h
- *
- * Created: 11/24/2022 11:11:44 AM
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef INIT_H_
 #define INIT_H_
 

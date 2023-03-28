@@ -1,17 +1,10 @@
-/*
- * lcd.h
- *
- * Created: 15-Nov-22 21:13:43
- *  Author: Armin
- */ 
-
-
+#pragma once
 #ifndef LCD_H_
 #define LCD_H_
 
 
 #include <avr/io.h>
-#define F_CPU 16000000
+#include "../clockfreq.h"
 #include <util/delay.h>
 
 
@@ -78,47 +71,36 @@
 
 
 
-// Set bit
-#define SETBIT(PORT, BIT)        { PORT |= (1 << BIT); }
-// Clear bit
-#define CLRBIT(PORT, BIT)        { PORT &= ~(1 << BIT); }
+// Macro definitions
+#define SETBIT(PORT, BIT)        { PORT |= (1 << BIT); }        // Set bit
+#define CLRBIT(PORT, BIT)        { PORT &= ~(1 << BIT); }       // Clear bit
 
 
-// LCD init
-void LCD_Initialization();
+// LCD Function declarations
+void LCD_Initialization();                              // LCD initialization
+void LCD_Clock();                                       // Clock pulse (E 0__|1|__0)
+void LCD_SendInstruction(uint8_t cmd);                  // Send instruction to LCD
+void LCD_SendData(uint8_t data);                        // Send data to LCD
+void LCD_SendString(char* p);                           // Send string to LCD
+void LCD_SendStringToLine(char* p, uint8_t line);       // Send string to one of the LCD's line
 
-// Adat írás
-void LCD_SendData(uint8_t data);
+uint8_t LCD_GetLineAddres(int row);                     // Returns the address of the first character of the given row
+void LCD_SetCursorPos(uint8_t line, uint8_t column);    // Set cursor position
+void LCD_SetCursorLine(uint8_t line);                   // Set cursor line 
 
-// Parancs írás
-void LCD_SendInstruction(uint8_t cmd);
+void LCD_Send8bitsIn4bitMode(uint8_t data);             // Send 8 bits in 4 bit mode
+void LCD_SetLowData(uint8_t data);                      // Set low data
 
-// E 0__|1|__0
-void LCD_Clock();
+void LCD_CheckBusyFlag();                               // Check busy flag
 
-// String küldés
-void LCD_SendString(char* p);
+void LCD_DisplayClear();                                // Clear display
+void LCD_DisplayOn();                                   // Turn the display on
+void LCD_CursorOn();                                    // Turn the cursor on
+void LCD_CursorOff();                                   // Turn the cursor off
+void LCD_CursorBlink();                                 // Turn the cursor blink on
 
-// String küldés különböz? sor-ra
-void LCD_SendStringToLine(char* p, uint8_t line);
+void LCD_SetPORT_DATA4to7();                            // Initialize the LCD data port
+void LCD_SetDDR_DATA4to7();                             // Set the LCD data port as output
+void LCD_ClearDDR_DATA4to7();                           // Clear the LCD data port
 
-uint8_t LCD_GetLineAddres(int row);
-void LCD_SetCursorPos(uint8_t line, uint8_t column);
-void LCD_SetCursorLine(uint8_t line);
-
-void LCD_Send8bitsIn4bitMode(uint8_t data);
-void LCD_SetLowData(uint8_t data);
-
-void LCD_CheckBusyFlag();
-
-void LCD_DisplayClear();
-void LCD_DisplayOn();
-void LCD_CursorOn();
-void LCD_CursorOff();
-void LCD_CursorBlink();
-
-void LCD_SetPORT_DATA4to7();
-void LCD_ClearDDR_DATA4to7();
-void LCD_SetDDR_DATA4to7();
-
-#endif /* LCD_H_ */
+#endif

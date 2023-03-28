@@ -1,13 +1,9 @@
-/*
- * sevseg.c
- *
- * Created: 11/24/2022 11:15:04 AM
- *  Author: Armin
- */ 
-
+// Header files
 #include "sevseg.h"
 
-// Seven segment display global variables
+
+
+// Seven segment display's global variables
 uint8_t sevseg_digits[4] = {};
 uint8_t sevseg_digsel = 0;
 
