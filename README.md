@@ -54,4 +54,4 @@ Contributions to this library are welcome! If you'd like to add a new driver or 
 
 ## License
 
-This library is released under the [MIT License](LICENSE).
+This library is released under the [MIT License](LICENSE.md).
