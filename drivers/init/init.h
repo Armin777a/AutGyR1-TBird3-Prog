@@ -12,4 +12,4 @@ void InitPorts();
 void InitTimer();
 
 
-#endif /* INIT_H_ */
+#endif
