@@ -1,6 +1,6 @@
-# OE-KVK T-Bird Driver Library for ATmega128 and ATmega64
+# OE-KVK T-Bird Driver Library
 
-This is a collection of drivers for the AVR ATmega128 microcontroller, developed for use with a development board. The drivers included in this library are:
+This is a collection of drivers for the AVR ATmega128 and ATmega64 microcontrollers, developed for use with the T-bird development board. The drivers included in this library are:
 
 - ADC
 - Buttons
@@ -11,6 +11,14 @@ This is a collection of drivers for the AVR ATmega128 microcontroller, developed
 - UART
 
 Each driver is contained in its own folder, with its own header and source file. 
+
+## Usage
+
+To use the drivers in your project, simply copy the drivers folder into your project folder. Then, in your main file, include the `drivers.h` header file. This will include all the drivers into your project. If you only want to use a specific driver, you can comment out the other drivers in that file.
+
+When using an ATmega64 be sure to change the clock frequency in the `clockfreq.h` file. And re calculate the settings for the timers in the `init.c` file.
+
+
 
 ## ADC
 
